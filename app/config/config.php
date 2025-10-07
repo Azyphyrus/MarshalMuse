@@ -1,6 +1,6 @@
 <?php
 // Base URL (adjust when uploaded)
-define('BASE_URL', 'http://localhost/Marshal_Muse/public/');
+define('BASE_URL', 'http://localhost:8000/');
 
 // ...existing code...
 // Database (if used)
