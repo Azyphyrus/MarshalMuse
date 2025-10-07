@@ -5,7 +5,7 @@ define('BASE_URL', 'http://localhost/Marshal_Muse/public/');
 // ...existing code...
 // Database (if used)
 // ...existing code...
-// Old static values removed and replaced with env-aware parsing
+// Old static values removed and replaced with env-aware parsing    
 
 // Debug mode
 define('DEBUG', true);
@@ -31,12 +31,25 @@ if (!$databaseUrl) {
 }
 
 if ($databaseUrl) {
-    $parts = parse_url($databaseUrl);
-    $dbHost = $parts['host'] ?? 'localhost';
-    $dbUser = $parts['user'] ?? '';
-    $dbPass = $parts['pass'] ?? '';
-    $dbPort = $parts['port'] ?? 5432;
-    $dbName = isset($parts['path']) ? ltrim($parts['path'], '/') : '';
+    // Robust parse: capture the userinfo up to the LAST '@' so passwords with '@' are preserved.
+    $pattern = '#^(?:(?P<scheme>[^:]+)://)?(?P<userinfo>.+)@(?P<host>[^:/]+)(?::(?P<port>\d+))?(?:/(?P<db>[^/?]+))?#';
+    if (preg_match($pattern, $databaseUrl, $m)) {
+        $userinfo = $m['userinfo'] ?? '';
+        $parts = explode(':', $userinfo, 2); // split user and pass (pass may contain colons)
+        $dbUser = isset($parts[0]) ? rawurldecode($parts[0]) : '';
+        $dbPass = isset($parts[1]) ? rawurldecode($parts[1]) : '';
+        $dbHost = $m['host'] ?? 'localhost';
+        $dbPort = $m['port'] ?? 5432;
+        $dbName = isset($m['db']) ? ltrim($m['db'], '/') : '';
+    } else {
+        // Fallback to parse_url if regex didn't match
+        $parts = parse_url($databaseUrl);
+        $dbHost = $parts['host'] ?? 'localhost';
+        $dbUser = isset($parts['user']) ? rawurldecode($parts['user']) : '';
+        $dbPass = isset($parts['pass']) ? rawurldecode($parts['pass']) : '';
+        $dbPort = $parts['port'] ?? 5432;
+        $dbName = isset($parts['path']) ? ltrim($parts['path'], '/') : '';
+    }
 
     define('DB_HOST', $dbHost);
     define('DB_USER', $dbUser);
