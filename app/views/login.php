@@ -33,7 +33,7 @@
     <h2 class="text-xl font-semibold mb-2">Sign in to your account</h2>
     <p class="text-sm text-muted mb-6">Access your tools, snippets, and workspaces.</p>
 
-    <form class="flex flex-col gap-4" action="<?= BASE_URL ?>index.php?url=login/authenticate" method="POST">
+    <form class="flex flex-col gap-4" action="<?= BASE_URL ?>index.php?url=signin/login" method="POST">
       <div>
         <label for="email" class="block text-sm font-medium mb-1 text-muted">Email</label>
         <input type="email" id="identifier" name="identifier" required
@@ -55,7 +55,7 @@
       </div>
       
         <?php if (!empty($data['error'])): ?>
-            <div class="bg-red-500/20 text-red-300 p-3 mb-4 rounded">
+            <div class="bg-red-500/20 text-red-600 p-3 mb-4 rounded">
             <?= htmlspecialchars($data['error']); ?>
             </div>
         <?php endif; ?>
@@ -68,7 +68,7 @@
 
     <p class="mt-6 text-center text-sm text-muted">
       Don’t have an account?
-      <a href="/register" class="text-muted font-medium hover:underline">Create one</a>
+      <a href="<?= BASE_URL ?>index.php?url=signup" class="text-muted font-medium hover:underline">Create one</a>
     </p>
   </main>
 </body>

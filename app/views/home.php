@@ -36,7 +36,7 @@
         <a class="text-muted no-underline text-sm py-2 px-3 rounded-lg hover:text-white hover:bg-glass-2 focus:text-white focus:outline-none focus:bg-glass-2" href="#features">Features</a>
         <a class="text-muted no-underline text-sm py-2 px-3 rounded-lg hover:text-white hover:bg-glass-2 focus:text-white focus:outline-none focus:bg-glass-2" href="#showcase">Showcase</a>
         <a class="text-muted no-underline text-sm py-2 px-3 rounded-lg hover:text-white hover:bg-glass-2 focus:text-white focus:outline-none focus:bg-glass-2" href="#pricing">Pricing</a>
-        <a class="inline-block py-2.5 px-3.5 rounded-lg cta-gradient text-white no-underline font-semibold text-sm" href="#start">Get started</a>
+        <a class="inline-block py-2.5 px-3.5 rounded-lg cta-gradient text-white no-underline font-semibold text-sm" href="<?= BASE_URL ?>index.php?url=signup">Get started</a>
       </nav>
 
       <!-- Mobile hamburger + checkbox -->
@@ -55,7 +55,7 @@
       <a class="block py-3 px-2 text-muted no-underline rounded-lg hover:bg-glass-2 hover:text-white" href="#features">Features</a>
       <a class="block py-3 px-2 text-muted no-underline rounded-lg hover:bg-glass-2 hover:text-white" href="#showcase">Showcase</a>
       <a class="block py-3 px-2 text-muted no-underline rounded-lg hover:bg-glass-2 hover:text-white" href="#pricing">Pricing</a>
-      <a class="inline-block my-3 mx-2 py-2.5 px-3.5 rounded-lg cta-gradient text-white no-underline font-semibold text-sm" href="#start">Get started</a>
+      <a class="inline-block my-3 mx-2 py-2.5 px-3.5 rounded-lg cta-gradient text-white no-underline font-semibold text-sm" href="<?= BASE_URL ?>index.php?url=signup">Get started</a>
     </nav>
 
     <!-- HERO -->

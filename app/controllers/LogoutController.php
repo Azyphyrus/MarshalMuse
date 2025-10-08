@@ -7,7 +7,7 @@ class LogoutController extends Controller{
         session_unset();
         session_destroy();
 
-        header('Location: ' . BASE_URL . 'index.php?url=login');
+        header('Location: ' . BASE_URL . 'index.php?url=signin');
         exit;
         
     }

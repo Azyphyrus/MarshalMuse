@@ -18,19 +18,19 @@ class SignupController extends Controller
 
             if (empty($username) || empty($email) || empty($password)) {
                 $error = "All required fields must be filled out.";
-                return $this->view('register', ['error' => $error]);
+                return $this->view('signup', ['error' => $error]);
             }
 
             if ($password !== $confirm) {
                 $error = "Passwords do not match.";
-                return $this->view('register', ['error' => $error]);
+                return $this->view('signup', ['error' => $error]);
             }
 
             $userModel = new User();
 
             if ($userModel->findByEmailOrUsername($email) || $userModel->findByEmailOrUsername($username)) {
                 $error = "Username or email already taken.";
-                return $this->view('register', ['error' => $error]);
+                return $this->view('signup', ['error' => $error]);
             }
 
             if ($userModel->createUser($username, $email, $password, $full_name)) {
@@ -38,10 +38,10 @@ class SignupController extends Controller
                 exit;
             } else {
                 $error = "Registration failed. Try again.";
-                return $this->view('register', ['error' => $error]);
+                return $this->view('signup', ['error' => $error]);
             }
         } else {
-            $this->view('register');
+            $this->view('signup');
         }
     }
 }

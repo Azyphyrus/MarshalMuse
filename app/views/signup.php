@@ -70,7 +70,9 @@
       </div>
 
     <?php if (!empty($error)): ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+    <div class="bg-red-500/20 text-red-600 p-3 mb-4 rounded">
+      <?= htmlspecialchars($error) ?></p>
+    </div>
     <?php endif; ?>
 
       <button type="submit"
@@ -81,7 +83,7 @@
 
     <p class="mt-6 text-center text-sm text-muted">
       Already have an account?
-      <a href="/login" class="text-muted font-medium hover:underline">Sign in</a>
+      <a href="<?= BASE_URL ?>index.php?url=signin" class="text-muted font-medium hover:underline">Sign in</a>
     </p>
   </main>
 </body>

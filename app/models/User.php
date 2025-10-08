@@ -52,4 +52,33 @@ class User
 
         return false; // Invalid credentials
     }
+
+    public function assignRole($userId, $roleId)
+    {
+        $sql = "INSERT INTO user_roles (user_id, role_id)
+                VALUES (:user_id, :role_id)
+                ON CONFLICT (user_id, role_id) DO NOTHING";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([':user_id' => $userId, ':role_id' => $roleId]);
+    }
+
+    public function getUserRoles($userId)
+    {
+        $sql = "SELECT r.* FROM roles r
+                INNER JOIN user_roles ur ON r.id = ur.role_id
+                WHERE ur.user_id = :user_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function hasRole($userId, $roleName)
+    {
+        $sql = "SELECT COUNT(*) FROM roles r
+                INNER JOIN user_roles ur ON r.id = ur.role_id
+                WHERE ur.user_id = :user_id AND r.name = :role_name";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':user_id' => $userId, ':role_name' => $roleName]);
+        return $stmt->fetchColumn() > 0;
+    }
 }
